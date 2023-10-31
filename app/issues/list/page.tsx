@@ -2,7 +2,7 @@ import {  Table } from '@radix-ui/themes';
 import prisma from '@/prisma/client';
 import delay from 'delay';
 import IssueActions from './IssueActions';
-import IssueStatusFilter from '../components/IssueStatusFilter';
+import IssueStatusFilter from '../../components/IssueStatusFilter';
 import { IssuesStatusBadge, Link } from '@/app/components';
 
 const IssuesPage = async () => {
