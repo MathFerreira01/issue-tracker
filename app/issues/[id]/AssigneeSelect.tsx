@@ -5,6 +5,7 @@ import { Select } from '@radix-ui/themes'
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Skeleton from 'react-loading-skeleton';
+import toast, { Toaster } from "react-hot-toast";
 
 const AssigneeSelect = ({issue}: {issue: Issue}) => {
   const { data: users, error, isLoading } = useQuery<User[]>({
@@ -24,6 +25,9 @@ const AssigneeSelect = ({issue}: {issue: Issue}) => {
       onValueChange={(userId) => {
         axios.patch("/api/issues/" + issue.id, {
           assignedToUserId: userId || null,
+        })
+        .catch(() => {
+          toast.error("Changes could not be saved.")
         })
       }}
     >
