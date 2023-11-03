@@ -11,11 +11,7 @@ const IssuesPage = async () => {
 
   return (
     <div>
-      <div className='flex flex-row justify-between'>
-        <IssueStatusFilter/>
         <IssueActions/>
-      </div>
-      
 
       <Table.Root variant="surface">
         <Table.Header>
