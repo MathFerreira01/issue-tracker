@@ -2,11 +2,24 @@ import {  Table } from '@radix-ui/themes';
 import prisma from '@/prisma/client';
 import delay from 'delay';
 import IssueActions from './IssueActions';
-import IssueStatusFilter from '../../components/IssueStatusFilter';
 import { IssuesStatusBadge, Link } from '@/app/components';
+import { Status } from '@prisma/client';
 
-const IssuesPage = async () => {
-  const issues = await prisma.issue.findMany();
+interface Props {
+  searchParams: { status: Status}
+}
+
+const IssuesPage = async ({ searchParams }: Props) => {
+  const statuses = Object.values(Status)
+  const status = statuses.includes(searchParams.status)
+  ? searchParams.status
+  : undefined
+
+  const issues = await prisma.issue.findMany({
+    where: {
+      status
+    }
+  });
   await delay(2000)
 
   return (
@@ -16,9 +29,9 @@ const IssuesPage = async () => {
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
-          <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-              <Table.ColumnHeaderCell className='hidden md:table-cell'>Status</Table.ColumnHeaderCell>
-              <Table.ColumnHeaderCell className='hidden md:table-cell'>Created</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className='hidden md:table-cell'>Status</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className='hidden md:table-cell'>Created</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
   
