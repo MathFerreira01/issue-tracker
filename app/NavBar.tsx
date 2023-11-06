@@ -7,7 +7,7 @@ import { AiFillBug } from 'react-icons/ai'
 import { useSession } from 'next-auth/react'
 import { Avatar, Box, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes'
 import classnames from 'classnames'
-import {Skeleton} from '@/app/components'
+import {Skeleton} from '@/app/issues/components'
 
 const NavBar = () => {
   return (

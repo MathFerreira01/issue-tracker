@@ -1,4 +1,4 @@
-import { IssuesStatusBadge } from '@/app/components'
+import { IssuesStatusBadge } from '@/app/issues/components'
 import { ArrowUpIcon } from '@radix-ui/react-icons'
 import { Table } from '@radix-ui/themes'
 import Link from 'next/link'

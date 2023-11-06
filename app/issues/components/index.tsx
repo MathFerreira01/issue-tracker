@@ -1,3 +1,5 @@
+'use client'
+
 export { default as Link } from './Link';
 export { default as ErrorMessage } from './ErrorMessage';
 export { default as IssuesStatusBadge } from './IssuesStatusBadge';

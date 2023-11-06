@@ -10,8 +10,8 @@ import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { issueSchema } from '@/app/createIssueSchema';
 import { z } from 'zod';
-import ErrorMessage from '@/app/components/ErrorMessage';
-import Spinner from '@/app/components/Spinner';
+import ErrorMessage from '@/app/issues/components/ErrorMessage';
+import Spinner from '@/app/issues/components/Spinner';
 import { Issue } from '@prisma/client';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {

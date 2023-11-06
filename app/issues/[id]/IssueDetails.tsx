@@ -1,4 +1,4 @@
-import { IssuesStatusBadge } from "@/app/components"
+import { IssuesStatusBadge } from "@/app/issues/components"
 import { Issue } from "@prisma/client"
 import { Card, Flex, Heading, Text } from "@radix-ui/themes"
 import ReactMarkdown from "react-markdown"
