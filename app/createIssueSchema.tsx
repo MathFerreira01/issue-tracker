@@ -6,7 +6,9 @@ export const issueSchema = z.object({
     .string()
     .min(1, "Description is required.")
     .max(65535),
-  status: z.enum(["OPEN", "IN_PROGRESS", "CLOSED"]),
+  status: z
+  .enum(["OPEN", "IN_PROGRESS", "CLOSED"])
+  .optional(),
 });
 
 export const patchIssueSchema = z.object({
@@ -28,4 +30,5 @@ export const patchIssueSchema = z.object({
     .nullable(),
   status: z
     .enum(["OPEN", "IN_PROGRESS", "CLOSED"])
+    .optional()
 });

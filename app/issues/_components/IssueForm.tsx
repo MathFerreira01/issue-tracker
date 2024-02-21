@@ -19,7 +19,7 @@ const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
 });
 
 interface FormData {
-  status: "OPEN" | "IN_PROGRESS" | "CLOSED"; // Tipagem dos valores do enum
+  status: "OPEN" | "IN_PROGRESS" | "CLOSED"; 
 }
 
 type IssueFormData = z.infer<typeof issueSchema>;
@@ -39,8 +39,6 @@ const IssueForm = ({ issue }: { issue?: Issue } ) => {
   const [isSubmitting, setSubmitting] = useState(false);
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data)
-
     try {
 
       setSubmitting(true);
