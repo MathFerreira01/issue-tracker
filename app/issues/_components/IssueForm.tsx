@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Callout, TextField } from '@radix-ui/themes';
+import { Button, Callout, Select, TextField } from '@radix-ui/themes';
 import dynamic from 'next/dynamic';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
@@ -18,6 +18,10 @@ const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
 });
 
+interface FormData {
+  status: "OPEN" | "IN_PROGRESS" | "CLOSED"; // Tipagem dos valores do enum
+}
+
 type IssueFormData = z.infer<typeof issueSchema>;
 
 const IssueForm = ({ issue }: { issue?: Issue } ) => {
@@ -26,6 +30,7 @@ const IssueForm = ({ issue }: { issue?: Issue } ) => {
     register,
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<IssueFormData>({
     resolver: zodResolver(issueSchema),
@@ -34,6 +39,8 @@ const IssueForm = ({ issue }: { issue?: Issue } ) => {
   const [isSubmitting, setSubmitting] = useState(false);
 
   const onSubmit = handleSubmit(async (data) => {
+    console.log(data)
+
     try {
 
       setSubmitting(true);
@@ -49,6 +56,10 @@ const IssueForm = ({ issue }: { issue?: Issue } ) => {
 
     }
   });
+  
+  const handleSelectChange = (value: string) => {
+    setValue('status', value as FormData['status']);
+  };
 
   return (
     <div className="max-w-xl">
@@ -58,6 +69,20 @@ const IssueForm = ({ issue }: { issue?: Issue } ) => {
         </Callout.Root>
       )}
       <form className="space-y-3" onSubmit={onSubmit}>
+      {issue && ( 
+          <Select.Root
+            {...register('status')}
+            onValueChange={handleSelectChange}
+            defaultValue={issue?.status || 'OPEN'} 
+          >
+            <Select.Trigger/>
+            <Select.Content>
+              <Select.Item value="OPEN">Open</Select.Item>
+              <Select.Item value="IN_PROGRESS">In Progress</Select.Item>
+              <Select.Item value="CLOSED">Closed</Select.Item>
+            </Select.Content>
+          </Select.Root>
+        )}
         <TextField.Root>
           <TextField.Input 
             defaultValue={issue?.title} 
